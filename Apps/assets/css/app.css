@@ -1,0 +1,240 @@
+input[type="radio"], input[type="checkbox"] {
+  margin: 0;
+}
+
+#sidebar {
+  display: block;
+  top: 55px; 
+  margin-left: 0px;
+  width: 300px;
+  height: 100%;
+  max-width: 100%;
+  float: left;
+  position: absolute;
+}
+
+#sidebar-hide-btn {
+  margin-top: -2px;
+}
+
+#aboutTabsContent {
+  padding-top: 10px;
+}
+
+.progress-bar-full {
+  width: 100%;
+}
+
+.panel-heading{
+  width: 300px;
+  background: grey;
+  color: white;
+}
+
+.panel-body{
+  width: 300px; 
+  background: rgba(42, 42, 42, 0.5);
+  color: #FFFFFF;
+}
+
+.feature-row {
+  cursor: pointer;
+  width: 250px;
+  background: rgba(42, 42, 42, 0.5);
+}
+
+.sidebar-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: rgba(42, 42, 42, 0.3);
+}
+
+#indoorNavigation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 10px;
+  overflow: auto;
+  background: rgba(42, 42, 42, 0.7);
+  font-family: sans-serif;
+  margin: 3px;
+  padding: 2px 3px;
+  border-radius: 4px;
+  border: 2px #505050 solid;	
+  left: -4px;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-size: 25px;
+  color: #FFFFFF;
+}
+.navbar-collapse.in {
+  overflow-y: hidden;
+}
+.navbar-header .navbar-icon-container {
+  margin-right: 15px;
+}
+.navbar-header .navbar-icon {
+  line-height: 50px;
+  height: 50px;
+}
+.navbar-header a.navbar-icon {
+  margin-left: 25px;
+}
+.typeahead {
+  background-color: #FFFFFF;
+}
+
+
+.typeahead-header {
+  margin: 0 5px 5px 5px;
+  padding: 3px 0;
+  border-bottom: 2px solid #333;
+}
+.has-feedback .form-control-feedback {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+@media (max-width: 992px) {
+  .navbar .navbar-brand {
+    font-size: 18px;
+  }
+}
+@media (max-width: 767px){
+  #sidebar {
+    display: none;
+  }
+  .url-break {
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+      hyphens: auto;
+  }
+ 
+}
+/* Print Handling */
+@media print {
+  .navbar {
+    display: none !important;
+  }
+  .leaflet-control-container {
+    display: none !important;
+  }
+}
+
+
+.centered {
+  margin: auto;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.group {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+label.indoorLabel {
+  color: rgba(255, 255, 255, 0.5);
+  font:  16px Roboto;
+  width: 20px;
+  cursor: text;
+  transition: .25s ease;
+  position: absolute; 
+  left: 2px;
+  top: 8px;
+ 
+}
+
+
+
+input.indoorText {
+  display: block;
+  width: 65%;
+  border: none;
+  padding-top: 10px;
+  padding-left:30px;
+  border-radius: 0;
+  color: white;
+  background: rgba(42, 42, 42, 0.6);
+  transition: .3s ease;
+  position: relative;
+   left: 55px;
+}
+
+
+input.indoorText:valid ~ label.indoorLabel {
+  top: 8px;
+  font: 700 16px Roboto;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input.indoorText:focus {
+  outline: none;
+  width: 70%;
+  font-size: 110%;
+  font-weight:bold;
+}
+
+input.indoorText:focus ~ label.indoorLabel {
+  top: 8px;
+  font: 700 20px Roboto;
+  color: #2196f3;
+}
+
+input.indoorText:focus ~ .bar:before {
+  transform: translateX(0);
+  
+}
+
+input.indoorText:focus  ~ .bar{
+	 background: #2196f3;
+	 height: 3px;
+	 width: 70%;
+}
+
+.bar {
+  background: rgba(255, 255, 255, 0.5);
+  content: '';
+  width: 65%;
+  height: 2px;
+  transition: .3s ease;
+  position: relative;
+     left: 55px;
+}
+
+.bar:before {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 150%;
+  background: #2196f3;
+  transform: translateX(-100%);
+  position: relative;
+   left: 55px;
+}
+
+::selection {
+  background: rgba(33, 150, 243, 0.3);
+}
+
+#indoorNavigation > button.cesium-button {
+	position:relative;
+    left: 10px;
+}

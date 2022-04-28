@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0" />
+    <meta name="author" content="http://.cn " />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <!-- 标题及搜索关键字 -->
+    <meta name="keywords" content=",cesium,3D,GIS" />
+    <meta name="description" content="leaflet leaflet框架 leaflet开发 cesium cesium开发 cesium框架 三维 地球 模型 WebGIS" />
+
+
+    <script>
+    </script>
+    <!-- Tell IE to use the latest, best version (or Chrome Frame if pre-IE11). -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Point Cloud & 3D Model</title>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <script src="bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../Build/Cesium/Cesium.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn. com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+    <link rel="stylesheet" href="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <script>
+        jQuery(document).ready(function() {
+
+            jQuery('#sidebar-hide-btn').click(function() {
+                jQuery('div#sidebar').toggle("slow");
+                //showNettoolbox();
+            });
+
+            jQuery('#list-btn').click(function() {
+                jQuery('div#sidebar').show();
+                // showNettoolbox();
+            }, );
+        });
+    </script>
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css">
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <!--script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script-->
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="main_style.css">
+    <link href="css/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="./js/haoutil.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="src/layui-v2.4.5/css/layui.css" rel="stylesheet" />
+    <script src="src/layui-v2.4.5/layui.all.js"></script>
+    <script src="src/cesium-measure.js"></script>
+    <script src="../Source/Widgets/SelectionIndicator/SelectionIndicatorViewModel.js"></script>
+    <style>
+        @import url(../Build/Cesium/Widgets/widgets.css);
+
+        html,
+        body,
+        #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #gogovan_toolbox {
+            position: absolute;
+            display: block;
+            left: 40px;
+            top: 580px;
+            width: 220px;
+            height: 100px;
+            background: rgba(42, 42, 42, 0.5);
+            border: 0px #505050 solid;
+            color: #fff;
+        }
+
+        .layui-card {
+            position: absolute;
+            top: 100px;
+            right: 5px;
+            background-color: #ffffff6b;
+            box-shadow: inset 1px 2px 2px 0 #f2f6fc;
+            color: white
+        }
+        /* pop框css*/
+        .cesium-popup-panel {
+            opacity: 0.8;
+            width: 312px;
+            position: absolute;
+            z-index: 999;
+            color: #00fcf9;
+
+            background: rgba(23, 50, 108, 0.6);
+            border: 1px solid #4674d6;
+        }
+        .cesium-popup-tip-panel {
+            width: 40px;
+            height: 20px;
+            position: absolute;
+            left: 50%;
+            bottom: -20px;
+            margin-left: -20px;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        .cesium-popup-tip-bottom {
+            width: 17px;
+            background: rgba(23, 50, 108, 0.8);
+            border-bottom: 1px solid #4674d6;
+            height: 17px;
+            padding: 1px;
+            margin: -10px auto 0;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .cesium-popup-header-panel {
+            /* display: flex; */
+            /* justify-content: space-between; */
+            align-items: center;
+            font-size: 14px;
+            padding: 5px 15px;
+            background: rgba(23, 50, 108, 0.8);
+
+            border-bottom: 1px solid #4674d6;
+        }
+
+        .cesium-poput-header-title {
+            font-size: 16px;
+            font-family: Microsoft YaHei;
+            font-weight: 400;
+            color: #ffffff;
+        }
+
+        .cesium-popup-content-panel {
+            padding: 18px;
+        }
+        .cesium-popup-close-btn{
+            float: right;
+            position: relative;
+            right: 10px;
+        }
+        .cesium-popup-close-btn,
+        .cesium-popup-close-btn:focus {
+            cursor: pointer;
+        }
+        cesium-popup-close-btn > svg:hover {
+            color: #00fcf9 !important;
+        }
+        .cesium-popup-close-btn > svg {
+            user-select: auto;
+            color: #4674d6;
+            cursor: pointer;
+            width: 15px;
+            /* height: 15px; */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="cesiumContainer">
+    <div class="layui-card">
+        <div class="layui-card-header" style="color:white">Measure Box</div>
+        <div class="layui-card-body">
+            <!-- <div>LoadModel:
+                <button type="button" class="layui-btn layui-btn-sm">Pointcloud</button>
+                <button type="button" class="layui-btn layui-btn-sm">Photogrammetry</button>
+                <button type="button" class="layui-btn layui-btn-sm">Mesh</button>
+            </div> -->
+            <!-- <br> -->
+            <div>
+                <button type="button" class="layui-btn layui-btn-sm">Distance</button>
+                <button type="button" class="layui-btn layui-btn-sm">Area</button>
+                <button type="button" class="layui-btn layui-btn-sm">Triangulation</button>
+            </div>
+            <br>
+            <div>
+                <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">Clear</button>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Point Cloud & 3D Model</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://www.lsgi.polyu.edu.hk/SCL/index.html" target="_blank">Our Website</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add models <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <!-- <li class="divider"></li>
+                            <li class="dropdown-submenu">
+                            <li id="list-btn" onclick="queryCitydb()"><a href="#">Open Panel</a></li>
+                    </li> -->
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                    <li id="list-btn" onclick="flytotko()"><a href="#">將軍澳MONTEREY</a></li>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                    <li id="list-btn" onclick="flytochildrenhospital_pt2()"><a href="#">TEST ONLY</a></li>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                    <li id="list-btn" onclick="zoomtogov()"><a href="#">東九龍政府合署</a></li>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                    <li id="list-btn" onclick="zoomtohospital()"><a href="#">兒童醫院</a></li>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                    <li id="list-btn" onclick="zoomtoalley()"><a href="#">興業街偉業街後巷</a></li>
+                    </li>
+                </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">System Tool Box <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li class="dropdown-submenu">
+                        <li id="list-btn" onclick="CzmlLoad1()"><a href="#">route1</a></li>
+                </li>
+                <li class="divider"></li>
+                <li class="dropdown-submenu">
+                <li id="list-btn" onclick="CzmlLoad2()"><a href="#">route2</a></li>
+                </li>
+                <li class="divider"></li>
+                <li class="dropdown-submenu">
+                <li id="list-btn" onclick="CzmlLoad3()"><a href="#">route3</a></li>
+        
+            
+                <li class="divider"></li>
+                <li class="dropdown-submenu">
+                <li id="list-btn" onclick="showCameraPositon()"><a href="#">Camera Position</a></li>
+                </li>
+                </ul>
+                <li>
+                    <a href="#" onclick="removeall()" class="dropdown-toggle" data-toggle="dropdown">Remove <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li onclick="debug()"><a href='#'><span>Remove 3D Tiles</span></a></li>
+                        <li class='last'><a href='#'><span>Remove Entities</span></a></li>
+                    </ul>
+                </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+
+    <div id="sidebar" style="display:none;">
+        <div class="sidebar-wrapper">
+
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Control Panel
+                    <button class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn"><i class="fa fa-chevron-left"></i></button>
+                </h3>
+            </div> -->
+
+            <div class="panel-body">
+
+                <div class="sidebar-content">
+
+                    <div id="indoorNavigation">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<b><span style="font-size:110%">Path Generation</span></b><br><br>
+                        <div class="centered">
+                            <div class="group">
+                                <button type="button" id="btnA" class="cesium-button" onclick="clickbtnA()">A</button>
+                                <button type="button" id="btnA" class="cesium-button" onclick="clickbtnB()">B</button>
+                                <button type="button" id="btnA" class="cesium-button" onclick="clickbtnC()">C</button>
+                                <label class="indoorLabel" id="startLabel" for="start">From:</label> 
+                                <!-- <input class="indoorText" type="text" id="startIpt" value="ZS628" required="required"> -->
+                                <!-- <label class="indoorLabel" id="startLabel" for="start">From</label> -->
+                                <!-- <div class="bar"></div> -->
+                            </div>
+                            <br>
+                            <div class="group">
+                                <button type="button" id="btnC" class="cesium-button" >D</button>
+                                <button type="button" id="btnC" class="cesium-button" >E</button>
+                                <button type="button" id="btnC" class="cesium-button" >F</button>
+                                <label class="indoorLabel" id="endLabel" for="end">To:</label>
+                                <!-- <input class="indoorText" type="text" id="endIpt" value="M1506" required="required" /> -->
+                                <!-- <label class="indoorLabel" id="endLabel" for="end">To</label> -->
+                                <!-- <div class="bar"></div> -->
+                            </div>
+                        </div>
+
+                        <br>
+                        <!-- <button type="button" id="btnA" class="cesium-button" onclick="clickbtnA()">点A</button>
+                        <button type="button" name="sub" class="cesium-button" onclick="NaviClear()">Clear</button>
+                        <button type="button" id="btnC" class="cesium-button" onclick="endpickmap()">点c</button>
+                        <button type="button" name="sub" class="cesium-button" onclick="GaodeNAvi();">Navigate</button>  -->
+                    </div>
+                    <br> 
+                    <p id="indoor_status" style="color:#00FFFF;text-align:center; font-size: 110%;"></p>
+                    <div id="indoorRouteResult" style="display:none">
+                        <div id='route_title' align='center'></div>
+                        <div id='route_subtitle' align='center'></div><br>
+                        <div id='route_content'>
+                            <table id='route_table'>
+                                <tr>
+                                    <td>3</td>
+                                    <td>classroom</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="citydbTable" style="display:block">
+                        <div id="citydbTitle" align='center'></div><br>
+                        <div id="citydb_content">
+                            Diatance: <span id="allDiatance" style="color: #cad1d1"></span><br />
+                            Time ：<span id="useTime" style="color: #cad1d1"></span><br />
+                            Navigation：<span id="dh" style="color: #cad1d1"></span><br />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- user mouse latitude,longitude and elevation(rough) -->
+    <div class="mouse-position">
+        <div class="mouse-postion-button">
+            <span>Lat </span>
+            <span id="mouse-position-lat">0</span>
+        </div>
+        <div class="mouse-postion-button">
+            <span>Lon </span>
+            <span id="mouse-position-lon">0</span>
+        </div>
+        <!-- TODO:support to show height -->
+        <div class="mouse-postion-button" style="display:none;">
+            <span>Height</span>
+            <span id="mouse-position-height">0m</span>
+        </div>
+    </div>
+
+    <!-- <button id="gpsButton" type="button" class="cesium-button"></button>
+    <div id="gogovan_toolbox">
+        &nbsp;&nbsp;&nbsp;&nbsp;3D Model and Point CLoud<br>
+        &nbsp;&nbsp;&nbsp;Model &nbsp;<input type="checkbox" id="a1" onchange="flytokegov()" unchecked> &nbsp;PT &nbsp;<input type="checkbox" id="a2" onchange="flytokegov_pt()" unchecked>東九龍政府合署</input><br>
+        &nbsp;&nbsp;&nbsp;Model &nbsp;<input type="checkbox" id="b1" onchange="flytoalley()" unchecked> &nbsp;PT &nbsp;<input type="checkbox" id="b2" onchange="flytoalley_pt()" unchecked>興業成業後巷</input><br>
+        &nbsp;&nbsp;&nbsp;Model &nbsp;<input type="checkbox" id="c1" onchange="flytochildrenhospital()" unchecked> &nbsp;PT &nbsp;<input type="checkbox" id="c2" onchange="flytochildrenhospital_pt()" unchecked>兒童醫院</input><br> -->
+ </div>
+
+    <script>
+        $('.dropdown-submenu').click(function(e) {
+            e.stopPropagation();
+        });
+        /*function enabledrawing(){
+          var drawing_toolbar = document.getElementById("toolbar");
+          drawing_toolbar.style.display = "inline";
+        }
+        function closedrawing(){
+          var drawing_toolbar = document.getElementById("toolbar");
+          drawing_toolbar.style.display = "none";
+        }*/
+
+        // }
+        </script>
+    <script src="script.js"></script>
+    <script src="CesiumPopup.js"></script>
+
+</body>
+
+</html>

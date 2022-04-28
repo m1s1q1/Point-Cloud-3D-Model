@@ -1,0 +1,583 @@
+ @import url(../Build/Cesium/Widgets/widgets.css);
+@import url(css/GPSButtonStyles.css);
+@import url(css/MobileFullscreenStyles.css);
+	html, body, #cesiumContainer {
+		top: 0px;
+		left: 0px;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		z-index: -1;
+	}
+
+	#uiMenu {
+	border-radius: 5px;
+	width: 224px;
+	padding: 5px;
+	position: absolute;
+	left: 0px;
+	font-family: "Arial";
+	z-index: 99999;
+	top: -1px;
+	height: 380px;
+	}
+
+	.loadingIndicator {
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -33px;
+		margin-left: -33px;
+		width: 66px;
+		height: 66px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-image: url(../theme/img/ajax-loader.gif);
+	}
+
+	.citydb_overSelect {
+        position: absolute;
+        left: 0; right: 0; top: 0; bottom: 0;
+    }
+
+	.citydb_short_container {
+		display: inline-block;
+		position: relative;
+		width: 98%;
+	}
+
+	.citydb_onethird_container {
+		display: inline-block;
+		position: relative;
+		width: 30%;
+	}
+
+	.citydb_oneforth_container {
+		display: inline-block;
+		position: relative;
+		width: 23%;
+	}
+
+	.citydb_long_container {
+		width:150px;
+		left:40px;
+	    margin-left: 0px;
+	    margin-right: 0%;
+	}
+
+    .citydb_dynamic_box {
+        display: none;
+        margin: 3px;
+	    padding: 2px 3px;
+	    position: relative;
+        border: 2px #505050 solid;
+		background: rgba(42, 42, 42, 0.6);
+        border-radius: 1px;
+        color: #fff;
+	    font-family: sans-serif;
+	    font-size: 9pt;
+    }
+
+    .citydb_dynamic_box input {
+        vertical-align: middle;
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+	.citydb_inputtable {
+		width: 100%;
+	}
+
+    .citydb_inputtable th, td {
+    	padding: 5px;
+	}
+
+    .citydb_inputtable select {
+	    width: 100%;
+	    padding: 3px;
+	    margin: 1px;
+	}
+
+    .citydb_inputtable input {
+	    width: 100%;
+	    padding: 0px;
+	    margin: 0px;
+    }
+
+	#citydb_layerlistpanel{
+		position:fixed;
+		top:60px;
+		font-family: : "Helvetica";
+		width: 210px;
+		left:1px;
+		background: rgba(153, 204, 255, 0.3);
+		text-align: left;
+		border-width: 0px;
+	}
+
+	#citydb_layerlistpanel label:hover {
+		background-color: #1e90ff;
+	}
+
+	#general {
+		position:fixed;
+		left:1320px;
+		z-index:10;
+	}
+
+	#polyu {
+		position:fixed;
+		left:120px;
+		z-index:10;
+	}
+
+	#application {
+		position:fixed;
+		left:320px;
+		z-index:10;
+	}
+
+	#bldg {
+		position:fixed;
+		left:520px;
+		z-index:10;
+	}
+
+	#transportation {
+		position:fixed;
+		left:720px;
+		z-index:10;
+	}
+
+	#utility {
+		position:fixed;
+		left:920px;
+		z-index:10;
+	}
+
+	#analysis3d {
+		position:fixed;
+		left:1120px;
+		z-index:10;
+	}
+
+	.toollist{
+		width:200px;
+		background: rgba(42, 42, 42, 0.5);
+        border: 1px #505050 solid;
+		display: none;
+	}
+
+	#general:hover #citydb_toolbox,#polyu:hover #polyu_toolbox,#bldg:hover #bldg_toolbox,#transportation:hover #transportation_toolbox,#utility:hover #utility_toolbox,#application:hover #application_toolbox,#analysis3d:hover #analysis3d_toolbox{
+			display: block;
+	}
+
+	#mFloor_toolbox {
+		position: absolute;
+		right: 190px;
+		top:459px;
+		width: 130px;
+		height: 370px;
+		display:none;
+		background: rgba(153, 204, 255, 0.3);
+		color: #fff;
+		text-align: left;
+	}
+
+	#legend {
+		width:180px;
+		background: rgba(153, 204, 255, 0.3);
+		position: absolute;
+		bottom: 108px;
+		right: 7px;
+		color: #FFFFFF;
+		z-index:10;
+	  }
+
+	  #legend #legend_title, #route_title {
+		text-align:center;
+		margin-bottom: 10px;
+		margin-top:5px;
+		font-weight: bold;
+		font-size: 100%;
+		}
+
+	  #legend #legend_scale ul {
+		margin: 0;
+		margin-left:10px;
+		margin-bottom: 5px;
+		padding: 0;
+		float: left;
+		list-style: none;
+		}
+
+	  #legend #legend_scale ul li {
+		font-size: 80%;
+		list-style: none;
+		margin-left: 0;
+		line-height: 18px;
+		margin-bottom: 2px;
+		color:#FFFFFF;
+		}
+
+	  #legend ul#legend_item li span.line {
+		display: block;
+		float: left;
+		height: 5px;
+		width: 40px;
+		margin-right: 10px;
+		margin-left: 0;
+		margin-top:5px;
+		}
+
+	#legend ul#legend_item li span.circle {
+		display: block;
+		float: left;
+		height: 8px;
+		border-radius: 4px;
+		width: 8px;
+		margin-right: 10px;
+		margin-left: 0;
+		margin-top:5px;
+		}
+
+
+	#legend ul#legend_item li span.box {
+		display: block;
+		float: left;
+		height: 16px;
+		width: 40px;
+		margin-right: 10px;
+		margin-left: 0;
+		}
+
+	 #legend .legend-source {
+		font-size: 70%;
+		color: #999;
+		clear: both;
+		}
+
+	 #legend a {
+		color: #777;
+		}
+
+	#legend #close, #roadBuffer_toolbox #close, #zwifi_toolbox #close, #indoorRoute_toolbox #close, #indoorRouteResult #close{
+		float:right;
+		margin-right:3px;
+		font-size: 80%;
+		color: #999;
+	}
+
+	#zFloor_toolbox {
+		position: absolute;
+		right: 321px;
+		top:459px;
+		width: 120px;
+		height: 370px;
+		display:none;
+		background: rgba(153, 204, 255, 0.3);
+		color: #fff;
+	}
+	#buffer_toolbox {
+		position: absolute;
+		left: 180px;
+		display:none;
+		top:280px;
+		width: 130px;
+		height: 90px;
+		background: rgba(42, 42, 42, 0.9);
+        border: 1px #505050 solid;
+		color: #fff;
+	}
+
+	#roadBuffer_toolbox{
+		position: absolute;
+		left: 190px;
+		display:none;
+		top:645px;
+		background: rgba(42, 42, 42, 0.8);
+        border: 1px #505050 solid;
+		color: #fff;
+		text-align: center;
+	}
+
+	#UUImage_toolbox{
+		position: absolute;
+		left: 40px;
+		display:none;
+		font-size: 90%;
+		top:680px;
+		background: rgba(42, 42, 42, 0.8);
+        border: 1px #505050 solid;
+		color: #fff;
+	}
+
+    /* Media query */
+    @media (max-width: 1600px) and (min-width: 300px) {
+        #general {
+            position:fixed;
+            left:1040px;
+            z-index:10;
+        }
+
+        #polyu {
+            position:fixed;
+            left:80px;
+            z-index:10;
+        }
+
+        #application {
+            position:fixed;
+            left:240px;
+            z-index:10;
+        }
+
+        #bldg {
+            position:fixed;
+            left:400px;
+            z-index:10;
+        }
+
+        #transportation {
+            position:fixed;
+            left:560px;
+            z-index:10;
+        }
+
+        #utility {
+            position:fixed;
+            left:720px;
+            z-index:10;
+        }
+
+		#analysis3d {
+            position:fixed;
+            left:880px;
+            z-index:10;
+        }
+    }
+    /*adjust styles on tablet and phone*/
+    @media (max-width: 768px){
+      .mouse-position{
+        display: none;
+      }
+    }
+  .mouse-position{
+    position: fixed;
+    bottom: 55px;
+    right: 200px;
+    z-index: 1;
+    height: 30px;
+    width: 220px;
+    border: 1px solid rgba(255,255,255,.1);
+    background-color: rgba(47,53,60,.8);
+    padding-left: 15px;
+    border-radius: 1px;
+  }
+  .mouse-postion-button{
+    display: inline-block;
+    font-family: Roboto,sans-serif;
+    font-size: 14px;
+    font-weight: lighter;
+    line-height: 30px;
+    color: #FFF;
+    text-align: center;
+  }
+	#ColoredByHeight_toolbox{
+		position: absolute;
+		left: 40px;
+		+
+		display:none;
+		font-size: 90%;
+		top:680px;
+		background: rgba(42, 42, 42, 0.8);
+        border: 1px #505050 solid;
+		color: #fff;
+	}
+	#gogovan_toolbox {
+		position: absolute;
+		display:none;
+		left: 40px;
+		top:580px;
+		width: 200px;
+		height: 140px;
+		background: rgba(42, 42, 42, 0.5);
+        border: 3px #505050 solid;
+		color: #fff;
+	}
+
+	#zwifi_toolbox, #clp_toolbox, #aqi_toolbox, #PlanD_toolbox{
+		position: absolute;
+		left: 1px;
+		top:600px;
+		display:none;
+		background: rgba(153, 204, 255, 0.3);
+        border: 0px #505050 solid;
+		color: #fff;
+	}
+	##PlanD_toolbox_KL{
+		position: absolute;
+		left: 60px;
+		top:600px;
+		display:none;
+		background: rgba(153, 204, 255, 0.3);
+        border: 0px #505050 solid;
+		color: #fff;
+	}
+	
+	#indoorRoute_toolbox {
+		position: relative;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		background: rgba(255, 255, 255, 0.5);
+        border: 3px #505050 solid;
+		color: #FFFFFF;
+	}
+	
+	#indoorRouteResult, #citydbTable {
+		position: relative;
+		top: 20px;
+		height: 450px;
+		display:none;
+		background: rgba(42, 42, 42, 0.7);
+        border: 2px #505050 solid;	
+		color: #fff;
+		border-radius: 4px;
+		overflow-y: scroll;
+	}
+
+	#indoorRouteResult table{
+		border-collapse: collapse;
+		color: #fff;
+		width: 90%;
+	}
+
+	td, #indoorRouteResult table{
+		border: 1px solid #505050;
+		text-align: center;
+	}
+	
+	tr{
+		height:120%;
+	}
+	#route_content{
+		margin-left:9%;
+		margin-bottom: 5%;
+	}
+
+	#route_title, #citydbTitle{
+		font-size:130%;
+		color:yellow;
+	}
+
+	#indoorRoute_toolbox button{
+		margin-left: 50px;
+		font-size:90%;
+	}
+	
+	#citydb_content > ul{
+		cursor: context-menu;
+	}
+	
+	
+	
+  /*
+  *YC panel
+  *cadaster panel
+  */
+  .panel-YC{
+    position: fixed;
+    top: 260px;
+    left: 40px;
+    width: 180px;
+    background: rgba(42, 42, 42, 0.8);
+    text-align: left;
+    margin: 3px;
+    padding: 5px;
+    border: 2px #505050 solid;
+    background: rgba(47,53,60,.8);
+    border-radius: 5px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 9pt;
+    display: none;
+  }
+
+  .panel-YC input[type='checkbox']{
+    margin-left: 3px;
+    padding: 5px;
+  }
+  .dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+.dropdown-submenu.pull-left {
+    float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.select_bar{
+    position: fixed;
+    top: 260px;
+    left: 40px;
+    width: 155px;
+    background: rgba(42, 42, 42, 0.8);
+    text-align: left;
+    margin: 3px;
+    padding: 5px;
+    border: 2px #505050 solid;
+    background: rgba(47,53,60,.8);
+    border-radius: 5px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 9pt;
+  }

@@ -1,0 +1,105 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [
+    {
+      "type" : "Feature",
+      "id" : 0,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          114.12471014334022,
+          22.345420866324144
+        ]
+      },
+      "properties" : {
+        "FID" : 0,
+        "Name" : " ",
+        "SourceID" : 4,
+        "SourceOID" : 10710,
+        "PosAlong" : 0.32912344859800002,
+        "SideOfEdge" : 1,
+        "CurbApproa" : 0,
+        "Status" : 0,
+        "FullEdge" : 0,
+        "BarrierTyp" : 0,
+        "Attr_Lengt" : 0,
+        "Attr_Junct" : 0
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 1,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          114.12892317996966,
+          22.355199125656192
+        ]
+      },
+      "properties" : {
+        "FID" : 1,
+        "Name" : " ",
+        "SourceID" : 3,
+        "SourceOID" : 2663,
+        "PosAlong" : 1,
+        "SideOfEdge" : 2,
+        "CurbApproa" : 0,
+        "Status" : 0,
+        "FullEdge" : 0,
+        "BarrierTyp" : 0,
+        "Attr_Lengt" : 0,
+        "Attr_Junct" : 0
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 2,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          114.12871945013653,
+          22.342922773352324
+        ]
+      },
+      "properties" : {
+        "FID" : 2,
+        "Name" : " ",
+        "SourceID" : 4,
+        "SourceOID" : 2617,
+        "PosAlong" : 1,
+        "SideOfEdge" : 2,
+        "CurbApproa" : 0,
+        "Status" : 0,
+        "FullEdge" : 0,
+        "BarrierTyp" : 0,
+        "Attr_Lengt" : 0,
+        "Attr_Junct" : 0
+      }
+    },
+    {
+      "type" : "Feature",
+      "id" : 3,
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          114.1897496636187,
+          22.32516534316235
+        ]
+      },
+      "properties" : {
+        "FID" : 3,
+        "Name" : " ",
+        "SourceID" : 4,
+        "SourceOID" : 7787,
+        "PosAlong" : 1,
+        "SideOfEdge" : 2,
+        "CurbApproa" : 0,
+        "Status" : 0,
+        "FullEdge" : 0,
+        "BarrierTyp" : 0,
+        "Attr_Lengt" : 0,
+        "Attr_Junct" : 0
+      }
+    }
+  ]
+}
